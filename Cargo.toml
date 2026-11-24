@@ -1,13 +1,18 @@
 [package]
-name = "c2rs"
+name = "tree-sitter-c2rs"
 version = "0.1.0"
 authors = ["Enzo Lombardi <enzinol@gmail.com>"]
 edition = "2024"
 description = "Transpile tree-sitter generated parser.c into pure Rust tables and lexer"
 license = "MIT"
 readme = "README.md"
+exclude = ["harness", ".github", "run.sh", "coverage.sh"]
 keywords = ["tree-sitter", "parser", "transpiler", "codegen"]
 categories = ["development-tools", "parsing"]
 repository = "https://github.com/aovestdipaperino/c2rs"
 
 [dependencies]
+
+[[bin]]
+name = "c2rs"
+path = "src/main.rs"

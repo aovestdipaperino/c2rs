@@ -3,5 +3,5 @@
 version = 4
 
 [[package]]
-name = "c2rs"
+name = "tree-sitter-c2rs"
 version = "0.1.0"

@@ -1,4 +1,4 @@
-# c2rs
+# c2rs (crate: tree-sitter-c2rs)
 
 [![CI](https://github.com/aovestdipaperino/c2rs/actions/workflows/ci.yml/badge.svg)](https://github.com/aovestdipaperino/c2rs/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -12,6 +12,7 @@ grammar crate needs no C compiler and no `build.rs`. The generated code plugs in
 tree-sitter runtime through the usual `tree_sitter_<name>()` symbol.
 
 ```
+cargo install tree-sitter-c2rs                      # installs the `c2rs` binary
 c2rs <parser.c> <out-dir> [--export-name NAME]     # writes abi.rs + parser.rs
 ```
 
