@@ -1,0 +1,13 @@
+[package]
+name = "diffh"
+version = "0.1.0"
+authors = ["Enzo Lombardi <enzinol@gmail.com>"]
+edition = "2024"
+license = "MIT"
+
+[dependencies]
+tree-sitter = "0.26"
+tree-sitter-language = "0.1"
+
+[build-dependencies]
+cc = "1"

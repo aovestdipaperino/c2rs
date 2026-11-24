@@ -1,0 +1,5 @@
+*.profraw
+harness/gen/
+harness/target-cov/
+harness/target/
+target/
