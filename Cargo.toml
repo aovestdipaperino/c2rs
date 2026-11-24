@@ -5,6 +5,9 @@ authors = ["Enzo Lombardi <enzinol@gmail.com>"]
 edition = "2024"
 description = "Transpile tree-sitter generated parser.c into pure Rust tables and lexer"
 license = "MIT"
+readme = "README.md"
+keywords = ["tree-sitter", "parser", "transpiler", "codegen"]
+categories = ["development-tools", "parsing"]
 repository = "https://github.com/aovestdipaperino/c2rs"
 
 [dependencies]
