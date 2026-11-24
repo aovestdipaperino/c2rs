@@ -328,6 +328,23 @@ fn main() {
     if args.get(2).is_some_and(|a| a != "-") {
         collect(Path::new(&args[2]), &exts, &mut inputs, false);
     }
+    // INPUTS_GOLDEN=<file>: use the inputs of a `<hex input>\t<sexp>` golden file (no corpus needed).
+    if let Ok(path) = std::env::var("INPUTS_GOLDEN") {
+        let mut n = 0;
+        for line in fs::read_to_string(&path).unwrap_or_default().lines() {
+            let Some((hex, _)) = line.split_once('\t') else {
+                continue;
+            };
+            let bytes: Vec<u8> = (0..hex.len() / 2)
+                .filter_map(|i| u8::from_str_radix(&hex[2 * i..2 * i + 2], 16).ok())
+                .collect();
+            if let Ok(t) = String::from_utf8(bytes) {
+                inputs.push(t);
+                n += 1;
+            }
+        }
+        println!("loaded {n} inputs from golden file {path}");
+    }
     if let Ok(list) = std::env::var("FILES") {
         let max: usize = std::env::var("MAXFILES")
             .ok()

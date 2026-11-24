@@ -50,6 +50,9 @@ builds both side by side and compares:
   valid symbols, on a mock lexer, comparing every `advance`, `skip` and `mark_end` call and the
   serialized state, with no parser in between;
 - `RS_SCANNER=<scanner.rs>` swaps a Rust scanner in for the C one, so ports are checked the same way;
+- `PREGEN=<dir>` verifies already-generated `abi.rs` and `parser.rs` (a crate's own files) instead
+  of transpiling again, and `INPUTS_GOLDEN=<file>` takes the inputs from a golden file, so a grammar
+  crate can be checked in CI without carrying corpora;
 - `GOLDEN=<file>` records `<hex input>\t<sexp>` cases from the C parser for use as golden tests;
 - `REPRO=<file>` parses one file with both and prints both trees.
 
