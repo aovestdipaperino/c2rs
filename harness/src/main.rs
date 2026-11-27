@@ -14,6 +14,9 @@ use std::{fs, path::Path};
 use tree_sitter::Parser;
 
 unsafe fn slice<'a, T>(p: *const T, n: usize) -> &'a [T] {
+    if n == 0 {
+        return &[];
+    }
     unsafe { std::slice::from_raw_parts(p, n) }
 }
 
@@ -159,7 +162,16 @@ fn check_tables() -> usize {
                 bad += 1;
             }
         }
-        let fc = c.field_count as usize + 1;
+        // A grammar without fields has a NULL `field_names` table on both sides.
+        if c.field_names.is_null() != r.field_names.is_null() {
+            println!("MISMATCH field_names presence");
+            bad += 1;
+        }
+        let fc = if c.field_names.is_null() || r.field_names.is_null() {
+            0
+        } else {
+            c.field_count as usize + 1
+        };
         let cf = slice(c.field_names, fc);
         let rf = slice(r.field_names, fc);
         for i in 0..fc {
