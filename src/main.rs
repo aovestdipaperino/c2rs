@@ -73,6 +73,13 @@ fn unescape_char(b: &[u8], i: &mut usize) -> i64 {
             }
             v
         }
+        b'u' | b'U' => {
+            // universal character name (\uXXXX, \UXXXXXXXX): the code point
+            let n = if c == b'u' { 4 } else { 8 };
+            let hex = std::str::from_utf8(&b[*i..*i + n]).unwrap();
+            *i += n;
+            i64::from_str_radix(hex, 16).unwrap()
+        }
         other => panic!("unsupported char escape \\{}", other as char),
     }
 }
@@ -550,7 +557,15 @@ fn rs_bytes(raw: &str) -> String {
     let mut i = 0;
     while i < b.len() {
         if b[i] == b'\\' {
+            let ucn = matches!(b.get(i + 1), Some(b'u' | b'U'));
             let v = unescape_char(b, &mut i);
+            if ucn {
+                // a universal character name is stored as UTF-8 in the execution character set
+                let ch = char::from_u32(v as u32).expect("invalid universal character name");
+                let mut buf = [0u8; 4];
+                bytes.extend_from_slice(ch.encode_utf8(&mut buf).as_bytes());
+                continue;
+            }
             bytes.push(v as u8);
         } else {
             bytes.push(b[i]);
