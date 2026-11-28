@@ -1,3 +1,5 @@
+<p align="center"><img src="https://raw.githubusercontent.com/aovestdipaperino/c2rs/main/assets/logo.svg" alt="c2rs logo" width="160"></p>
+
 # c2rs (crate: tree-sitter-c2rs)
 
 [![CI](https://github.com/aovestdipaperino/c2rs/actions/workflows/ci.yml/badge.svg)](https://github.com/aovestdipaperino/c2rs/actions/workflows/ci.yml)
